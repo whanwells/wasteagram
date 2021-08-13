@@ -17,6 +17,7 @@ class PostListView extends StatelessWidget {
           final post = posts[index];
           return ListTile(
             title: Text(_dateFormatter.format(post['date'].toDate())),
+            trailing: Text(post['quantity'].toString()),
           );
         });
   }
