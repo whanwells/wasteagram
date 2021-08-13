@@ -7,9 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Wasteagram',
       theme: ThemeData(primarySwatch: Colors.blue),
-      routes: {
-        '/': (context) => ListScreen(),
-      },
+      home: ListScreen(),
     );
   }
 }
