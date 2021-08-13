@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../widgets/upload_button.dart';
@@ -15,16 +17,17 @@ class NewPostForm extends StatefulWidget {
 
 class _NewPostFormState extends State<NewPostForm> {
   final _formKey = GlobalKey<FormState>();
+  var _quantity = 0;
 
   @override
   Widget build(BuildContext context) {
+    final image = File(widget.image.path);
+
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          Expanded(
-            child: Image.file(File(widget.image.path)),
-          ),
+          Expanded(child: Image.file(image)),
           SizedBox(height: 12),
           Expanded(
             child: TextFormField(
@@ -41,13 +44,31 @@ class _NewPostFormState extends State<NewPostForm> {
                     : null;
               },
               onSaved: (value) {
-                // TODO
+                _quantity = int.parse(value!);
               },
             ),
           ),
           Spacer(),
-          UploadButton(onPressed: () {
-            // TODO
+          UploadButton(onPressed: () async {
+            if (!_formKey.currentState!.validate()) {
+              return;
+            }
+
+            _formKey.currentState!.save();
+
+            final storageReference = FirebaseStorage.instance
+                .ref()
+                .child(DateTime.now().millisecondsSinceEpoch.toString());
+
+            await storageReference.putFile(image);
+
+            FirebaseFirestore.instance.collection('posts').add({
+              'date': DateTime.now(),
+              'imageURL': await storageReference.getDownloadURL(),
+              'quantity': _quantity,
+            });
+
+            Navigator.of(context).pop();
           }),
         ],
       ),
