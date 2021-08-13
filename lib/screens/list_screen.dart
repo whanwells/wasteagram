@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../widgets/app_title.dart';
-import 'new_post_screen.dart';
+import '../widgets/image_picker_fab.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -39,29 +38,8 @@ class _ListScreenState extends State<ListScreen> {
               });
         },
       ),
-      floatingActionButton: Semantics(
-        button: true,
-        onTapHint: 'Select an image',
-        child: FloatingActionButton(
-          onPressed: () async {
-            final image = await _pickImage();
-            if (image != null) {
-              _pushNewPostScreen(context, image);
-            }
-          },
-          child: Icon(Icons.photo),
-        ),
-      ),
+      floatingActionButton: ImagePickerFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
-  }
-
-  Future<XFile?> _pickImage() {
-    return ImagePicker().pickImage(source: ImageSource.gallery);
-  }
-
-  void _pushNewPostScreen(BuildContext context, XFile image) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => NewPostScreen(image: image)));
   }
 }
