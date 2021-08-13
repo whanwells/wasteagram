@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../widgets/post_list_view.dart';
 
 class PostStream extends StatefulWidget {
   const PostStream({Key? key}) : super(key: key);
@@ -10,8 +10,6 @@ class PostStream extends StatefulWidget {
 }
 
 class _PostStreamState extends State<PostStream> {
-  static final _dateFormatter = DateFormat('EEEE, MMMM d, y');
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -23,14 +21,7 @@ class _PostStreamState extends State<PostStream> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              final post = snapshot.data!.docs[index];
-              return ListTile(
-                title: Text(_dateFormatter.format(post['date'].toDate())),
-              );
-            });
+        return PostListView(posts: snapshot.data!.docs);
       },
     );
   }
