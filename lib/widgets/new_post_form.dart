@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../widgets/upload_button.dart';
 import '../widgets/wasted_item_count_field.dart';
+import '../constants.dart';
 
 class NewPostForm extends StatefulWidget {
   final XFile image;
@@ -59,6 +60,8 @@ class _NewPostFormState extends State<NewPostForm> {
       'date': DateTime.now(),
       'imageURL': await storageReference.getDownloadURL(),
       'quantity': quantity,
+      'latitude': latitude,
+      'longitude': longitude,
     });
   }
 }
