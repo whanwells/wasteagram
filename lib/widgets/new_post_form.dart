@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../widgets/upload_button.dart';
+import '../widgets/wasted_item_count_field.dart';
 
 class NewPostForm extends StatefulWidget {
   final XFile image;
@@ -30,22 +30,8 @@ class _NewPostFormState extends State<NewPostForm> {
           Expanded(child: Image.file(image)),
           SizedBox(height: 12),
           Expanded(
-            child: TextFormField(
-              autofocus: true,
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              decoration: InputDecoration(
-                hintText: 'Number of Wasted Items',
-              ),
-              textAlign: TextAlign.center,
-              validator: (value) {
-                return value == null || value.isEmpty
-                    ? 'Number of wasted items is required'
-                    : null;
-              },
-              onSaved: (value) {
-                _quantity = int.parse(value!);
-              },
+            child: WastedItemCountField(
+              onSaved: (value) => _quantity = value!,
             ),
           ),
           Spacer(),
