@@ -39,25 +39,26 @@ class _NewPostFormState extends State<NewPostForm> {
             if (!_formKey.currentState!.validate()) {
               return;
             }
-
             _formKey.currentState!.save();
-
-            final storageReference = FirebaseStorage.instance
-                .ref()
-                .child(DateTime.now().millisecondsSinceEpoch.toString());
-
-            await storageReference.putFile(image);
-
-            FirebaseFirestore.instance.collection('posts').add({
-              'date': DateTime.now(),
-              'imageURL': await storageReference.getDownloadURL(),
-              'quantity': _quantity,
-            });
-
+            await _addPost(image, _quantity);
             Navigator.of(context).pop();
           }),
         ],
       ),
     );
+  }
+
+  static Future<void> _addPost(File image, int quantity) async {
+    final storageReference = FirebaseStorage.instance
+        .ref()
+        .child(DateTime.now().millisecondsSinceEpoch.toString());
+
+    await storageReference.putFile(image);
+
+    FirebaseFirestore.instance.collection('posts').add({
+      'date': DateTime.now(),
+      'imageURL': await storageReference.getDownloadURL(),
+      'quantity': quantity,
+    });
   }
 }
