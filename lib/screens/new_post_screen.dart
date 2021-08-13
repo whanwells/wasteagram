@@ -1,6 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../widgets/new_post_form.dart';
 import '../constants.dart';
 
 class NewPostScreen extends StatelessWidget {
@@ -14,7 +14,11 @@ class NewPostScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appName),
       ),
-      body: Image.file(File(image.path)),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: NewPostForm(image: image),
+      ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
