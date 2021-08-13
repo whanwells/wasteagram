@@ -13,7 +13,10 @@ class _PostStreamState extends State<PostStream> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('posts')
+          .orderBy('date', descending: true)
+          .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData ||
             snapshot.data?.docs == null ||
