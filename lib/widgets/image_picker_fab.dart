@@ -11,17 +11,18 @@ class ImagePickerFab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Semantics(
-          button: true,
-          onTapHint: 'Select an image',
-          child: FloatingActionButton(
-            onPressed: () async {
-              final image = await _pick();
-              if (image != null) {
-                _pushNewPostScreen(context, image);
-              }
-            },
-            child: Icon(Icons.photo),
-          ));
+        button: true,
+        onTapHint: 'Select an image',
+        child: FloatingActionButton(
+          onPressed: () async {
+            final image = await _pick();
+            if (image != null) {
+              _pushNewPostScreen(context, image);
+            }
+          },
+          child: Icon(Icons.photo),
+        ),
+      );
     });
   }
 
