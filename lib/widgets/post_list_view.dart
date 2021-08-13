@@ -12,13 +12,14 @@ class PostListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          final post = posts[index];
-          return ListTile(
-            title: Text(_dateFormatter.format(post['date'].toDate())),
-            trailing: Text(post['quantity'].toString()),
-          );
-        });
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        final post = posts[index];
+        return ListTile(
+          title: Text(_dateFormatter.format(post['date'].toDate())),
+          trailing: Text(post['quantity'].toString()),
+        );
+      },
+    );
   }
 }
