@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/list_screen.dart';
+import 'constants.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Wasteagram',
+      title: appName,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: ListScreen(),
     );
