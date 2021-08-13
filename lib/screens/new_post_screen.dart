@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../widgets/app_title.dart';
+import '../constants.dart';
 
 class NewPostScreen extends StatelessWidget {
   final XFile image;
@@ -12,7 +12,7 @@ class NewPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppTitle(),
+        title: const Text(appName),
       ),
       body: Image.file(File(image.path)),
     );
