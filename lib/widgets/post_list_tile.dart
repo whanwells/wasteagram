@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/post.dart';
+import '../screens/detail_screen.dart';
 import '../utils/date.dart';
 
 class PostListTile extends StatelessWidget {
@@ -12,6 +13,12 @@ class PostListTile extends StatelessWidget {
     return ListTile(
       title: Text(formatDate(post.date)),
       trailing: Text(post.quantity.toString()),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailScreen(post: post),
+        ),
+      ),
     );
   }
 }
