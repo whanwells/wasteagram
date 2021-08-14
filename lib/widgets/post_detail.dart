@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/post.dart';
 import '../utils/date.dart';
+import './post_detail_image.dart';
 
 class PostDetail extends StatelessWidget {
   final Post post;
@@ -17,22 +18,7 @@ class PostDetail extends StatelessWidget {
         children: [
           Text(formatDate(post.date), style: theme.textTheme.headline6),
           const SizedBox(height: 12),
-          Image.network(
-            post.imageURL,
-            loadingBuilder: (context, child, progress) {
-              if (progress == null) {
-                return Semantics(
-                  child: child,
-                  label: 'Image of wasted items.',
-                );
-              }
-
-              return Semantics(
-                child: CircularProgressIndicator(),
-                label: 'Image loading',
-              );
-            },
-          ),
+          PostDetailImage(url: post.imageURL),
           const SizedBox(height: 12),
           Text('Items: ${post.quantity}', style: theme.textTheme.headline6),
           const SizedBox(height: 12),
