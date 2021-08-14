@@ -1,11 +1,9 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../widgets/upload_button.dart';
 import '../widgets/wasted_item_count_field.dart';
-import '../constants.dart';
+import '../stores/post.dart';
 
 class NewPostForm extends StatefulWidget {
   final XFile image;
@@ -41,27 +39,11 @@ class _NewPostFormState extends State<NewPostForm> {
               return;
             }
             _formKey.currentState!.save();
-            await _addPost(image, _quantity);
+            await addPost(image, _quantity);
             Navigator.of(context).pop();
           }),
         ],
       ),
     );
-  }
-
-  static Future<void> _addPost(File image, int quantity) async {
-    final storageReference = FirebaseStorage.instance
-        .ref()
-        .child(DateTime.now().millisecondsSinceEpoch.toString());
-
-    await storageReference.putFile(image);
-
-    FirebaseFirestore.instance.collection('posts').add({
-      'date': DateTime.now(),
-      'imageURL': await storageReference.getDownloadURL(),
-      'quantity': quantity,
-      'latitude': latitude,
-      'longitude': longitude,
-    });
   }
 }
