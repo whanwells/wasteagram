@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../models/post.dart';
 import '../widgets/post_list_tile.dart';
 
 class PostListView extends StatelessWidget {
@@ -11,7 +12,9 @@ class PostListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: posts.length,
-      itemBuilder: (context, index) => PostListTile(post: posts[index]),
+      itemBuilder: (context, index) => PostListTile(
+        post: Post.fromSnapshot(posts[index]),
+      ),
     );
   }
 }
