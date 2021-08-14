@@ -19,7 +19,11 @@ class _PostStreamState extends State<PostStream> {
         if (!snapshot.hasData ||
             snapshot.data?.docs == null ||
             snapshot.data!.docs.length == 0) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: const CircularProgressIndicator(
+              semanticsLabel: 'No posts have been created yet',
+            ),
+          );
         }
 
         return PostListView(posts: snapshot.data!.docs);
