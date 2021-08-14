@@ -16,7 +16,7 @@ class PostDetail extends StatelessWidget {
       child: Column(
         children: [
           Text(formatDate(post.date), style: theme.textTheme.headline6),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Image.network(
             post.imageURL,
             loadingBuilder: (context, child, progress) {
@@ -33,9 +33,9 @@ class PostDetail extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text('Items: ${post.quantity}', style: theme.textTheme.headline6),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text('(${post.latitude}, ${post.longitude})'),
         ],
       ),

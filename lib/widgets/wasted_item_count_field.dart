@@ -13,9 +13,7 @@ class WastedItemCountField extends StatelessWidget {
       autofocus: true,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      decoration: InputDecoration(
-        hintText: 'Number of Wasted Items',
-      ),
+      decoration: const InputDecoration(hintText: 'Number of Wasted Items'),
       textAlign: TextAlign.center,
       validator: (value) {
         return value == null || value.isEmpty

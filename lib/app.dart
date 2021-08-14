@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: ListScreen(),
+      home: const ListScreen(),
     );
   }
 }

@@ -14,7 +14,7 @@ class ImagePickerFab extends StatelessWidget {
         button: true,
         onTapHint: 'Select an image',
         child: FloatingActionButton(
-          child: Icon(Icons.photo),
+          child: const Icon(Icons.photo),
           onPressed: () async {
             final image = await _picker.pickImage(source: ImageSource.gallery);
             if (image == null) return;

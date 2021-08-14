@@ -13,10 +13,7 @@ class UploadButton extends StatelessWidget {
         button: true,
         onTapHint: 'Create post',
         child: ElevatedButton(
-          child: Icon(
-            Icons.cloud_upload,
-            size: 40,
-          ),
+          child: const Icon(Icons.cloud_upload, size: 40),
           style: ElevatedButton.styleFrom(padding: EdgeInsets.all(16)),
           onPressed: onPressed,
         ),

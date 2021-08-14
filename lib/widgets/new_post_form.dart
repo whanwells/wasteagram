@@ -27,17 +27,15 @@ class _NewPostFormState extends State<NewPostForm> {
       child: Column(
         children: [
           Expanded(child: Image.file(image)),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Expanded(
             child: WastedItemCountField(
               onSaved: (value) => _quantity = value!,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           UploadButton(onPressed: () async {
-            if (!_formKey.currentState!.validate()) {
-              return;
-            }
+            if (!_formKey.currentState!.validate()) return;
             _formKey.currentState!.save();
             await addPost(image, _quantity);
             Navigator.of(context).pop();
