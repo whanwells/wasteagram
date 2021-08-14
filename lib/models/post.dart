@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Post {
   final DateTime date;
   final String imageURL;
@@ -15,10 +13,10 @@ class Post {
     required this.longitude,
   });
 
-  Post.fromSnapshot(QueryDocumentSnapshot snapshot)
-      : date = snapshot['date'].toDate(),
-        imageURL = snapshot['imageURL'],
-        quantity = snapshot['quantity'],
-        latitude = snapshot['latitude'],
-        longitude = snapshot['longitude'];
+  Post.fromMap(Map<String, dynamic> map)
+      : date = map['date'],
+        imageURL = map['imageURL'],
+        quantity = map['quantity'],
+        latitude = map['latitude'],
+        longitude = map['longitude'];
 }

@@ -13,7 +13,7 @@ class PostListView extends StatelessWidget {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) => PostListTile(
-        post: Post.fromSnapshot(posts[index]),
+        post: Post.fromMap(posts[index].data() as Map<String, dynamic>),
       ),
     );
   }
