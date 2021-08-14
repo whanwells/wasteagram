@@ -17,7 +17,12 @@ class PostDetail extends StatelessWidget {
         children: [
           Text(formatDate(post.date), style: theme.textTheme.headline6),
           SizedBox(height: 12),
-          Image.network(post.imageURL),
+          Image.network(
+            post.imageURL,
+            loadingBuilder: (context, child, progress) {
+              return progress == null ? child : CircularProgressIndicator();
+            },
+          ),
           SizedBox(height: 12),
           Text('Items: ${post.quantity}', style: theme.textTheme.headline6),
           SizedBox(height: 12),
