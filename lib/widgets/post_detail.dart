@@ -20,7 +20,17 @@ class PostDetail extends StatelessWidget {
           Image.network(
             post.imageURL,
             loadingBuilder: (context, child, progress) {
-              return progress == null ? child : CircularProgressIndicator();
+              if (progress == null) {
+                return Semantics(
+                  child: child,
+                  label: 'Image of wasted items.',
+                );
+              }
+
+              return Semantics(
+                child: CircularProgressIndicator(),
+                label: 'Image loading',
+              );
             },
           ),
           SizedBox(height: 12),
